@@ -5,8 +5,17 @@ import seaborn as sns
 import numpy as np
 
 
-def boostrap(sample, sample_size, iterations):
-	# <---INSERT YOUR CODE HERE--->
+def boostrap(sample, sample_size, iterations, ci):
+	samples = np.empty((iterations, sample_size))
+	for i in range(iterations):
+		samples[i] = np.random.choice(sample, sample_size, replace=True)
+	data_mean = np.mean(samples)
+	means = np.empty(iterations)
+
+	for i in range(iterations):
+		means[i] = np.mean(samples[i])
+	lower = np.percentile(means, float(100 - ci)/2,0,interpolation='nearest')
+	upper = np.percentile(means,100 - float(100 - ci)/2,0,interpolation='nearest')
 	return data_mean, lower, upper
 
 
@@ -16,7 +25,7 @@ if __name__ == "__main__":
 	data = df.values.T[1]
 	boots = []
 	for i in range(100, 100000, 1000):
-		boot = boostrap(data, data.shape[0], i)
+		boot = boostrap(data, data.shape[0], i, 95)
 		boots.append([i, boot[0], "mean"])
 		boots.append([i, boot[1], "lower"])
 		boots.append([i, boot[2], "upper"])
@@ -31,8 +40,8 @@ if __name__ == "__main__":
 	sns_plot.savefig("bootstrap_confidence.pdf", bbox_inches='tight')
 
 
-	#print ("Mean: %f")%(np.mean(data))
-	#print ("Var: %f")%(np.var(data))
+	print ("Mean: %f")%(np.mean(data))
+	print ("Var: %f")%(np.var(data))
 	
 
 
