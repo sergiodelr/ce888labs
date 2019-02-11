@@ -4,20 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import bootstrap as bs
 
-def power(sample1, sample2, reps, size, alpha):
-    pvalue_larger = 0
 
-    t_obs = np.mean(sample2) - np.mean(sample1)
-
-    sample = np.concatenate((sample1, sample2))
-    for i in range(reps):
-        perm = np.random.permutation(sample)
-        new = np.split(perm, [size])
-        t_perm = np.mean(new[1]) - np.mean(new[0])
-        if t_perm > t_obs:
-            pvalue_larger = pvalue_larger + 1
-
-    return pvalue_larger/reps
 
 if __name__ == '__main__':
     df = pd.read_csv('./vehicles.csv')
