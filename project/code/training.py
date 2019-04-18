@@ -28,9 +28,9 @@ def train(df, training_proportions, hidden_layers, layer_sizes, same_proportion_
     for proportion in training_proportions:
         if proportion != 1:
             x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=1 - proportion, random_state=1)
-            encoder = pretrained_encoder(x_train, x_test, hidden_layers, layer_sizes, reconstruct_input=True)
+            encoder = pretrained_encoder(x_train, x_test, hidden_layers, layer_sizes, reconstruct_input=False)
         else:
-            encoder = pretrained_encoder(x, None, hidden_layers, layer_sizes, reconstruct_input=True)
+            encoder = pretrained_encoder(x, None, hidden_layers, layer_sizes, reconstruct_input=False)
         model = encoder_classifier_model(encoder)
         model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 

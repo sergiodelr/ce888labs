@@ -47,20 +47,20 @@ if __name__ == '__main__':
     # arr_metrics_df.to_csv('../results/arrhythmia_16batch_relu_30test.csv')
 
     # Train phishing
-    # phish_metrics_dict = {}
-    # phish_metrics_dict["32_1"] = train(df_phish, [0.3, 0.5, 0.7, 1], 1, [32], True)
-    # phish_metrics_dict["24_1"] = train(df_phish, [0.3, 0.5, 0.7, 1], 1, [24], True)
-    # phish_metrics_dict["32_16_1"] = train(df_phish, [0.3, 0.5, 0.7, 1], 2, [32, 16], True)
-    # phish_metrics_dict["32_24_1"] = train(df_phish, [0.3, 0.5, 0.7, 1], 2, [32, 24], True)
-    #
-    # phish_metrics_dict["32_0"] = train(df_phish, [0.3, 0.5, 0.7, 1], 1, [32], False)
-    # phish_metrics_dict["24_0"] = train(df_phish, [0.3, 0.5, 0.7, 1], 1, [24], False)
-    # phish_metrics_dict["32_16_0"] = train(df_phish, [0.3, 0.5, 0.7, 1], 2, [32, 16], False)
-    # phish_metrics_dict["32_24_0"] = train(df_phish, [0.3, 0.5, 0.7, 1], 2, [32, 24], False)
-    #
-    # phish_metrics_df = pd.DataFrame.from_dict(phish_metrics_dict, orient='index',
-    #                                           columns=['0.3', '0.5', '0.7', '1'])
-    # phish_metrics_df.to_csv('../results/phishing_16batch_relu_30test.csv')
+    phish_metrics_dict = {}
+    phish_metrics_dict["32_1"] = train(df_phish, [0.3, 0.5, 0.7, 1], 1, [32], True)
+    phish_metrics_dict["24_1"] = train(df_phish, [0.3, 0.5, 0.7, 1], 1, [24], True)
+    phish_metrics_dict["32_16_1"] = train(df_phish, [0.3, 0.5, 0.7, 1], 2, [32, 16], True)
+    phish_metrics_dict["32_24_1"] = train(df_phish, [0.3, 0.5, 0.7, 1], 2, [32, 24], True)
+
+    phish_metrics_dict["32_0"] = train(df_phish, [0.3, 0.5, 0.7, 1], 1, [32], False)
+    phish_metrics_dict["24_0"] = train(df_phish, [0.3, 0.5, 0.7, 1], 1, [24], False)
+    phish_metrics_dict["32_16_0"] = train(df_phish, [0.3, 0.5, 0.7, 1], 2, [32, 16], False)
+    phish_metrics_dict["32_24_0"] = train(df_phish, [0.3, 0.5, 0.7, 1], 2, [32, 24], False)
+
+    phish_metrics_df = pd.DataFrame.from_dict(phish_metrics_dict, orient='index',
+                                              columns=['0.3', '0.5', '0.7', '1'])
+    phish_metrics_df.to_csv('../results/phishing_16batch_sigmoid_30test.csv')
 
     # Train HTRU2
     htru_metrics_dict = {}
@@ -76,4 +76,4 @@ if __name__ == '__main__':
 
     htru_metrics_df = pd.DataFrame.from_dict(htru_metrics_dict, orient='index',
                                              columns=['0.3', '0.5', '0.7', '1'])
-    htru_metrics_df.to_csv('../results/htru2_16batch_relu_30test.csv')
+    htru_metrics_df.to_csv('../results/htru2_16batch_sigmoid_30test.csv')
