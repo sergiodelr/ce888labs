@@ -27,24 +27,24 @@ if __name__ == '__main__':
     df_arr = preprocess_arrhythmia(df_arr)
 
     # Train arrhythmia
-    # arr_metrics_dict = {}
-    # arr_metrics_dict["256_1"] = train(df_arr, [0.3, 0.5, 0.7, 1], 1, [256], True)
-    # arr_metrics_dict["128_1"] = train(df_arr, [0.3, 0.5, 0.7, 1], 1, [128], True)
-    # arr_metrics_dict["256_200_1"] = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [256, 200], True)
-    # arr_metrics_dict["256_128_1"] = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [256, 128], True)
-    # arr_metrics_dict["128_64_1"] = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [128, 64], True)
-    # arr_metrics_dict["256_128_64_1"] = train(df_arr, [0.3, 0.5, 0.7, 1], 3, [256, 128, 64], True)
-    #
-    # arr_metrics_dict["256_0"] = train(df_arr, [0.3, 0.5, 0.7, 1], 1, [256], False)
-    # arr_metrics_dict["128_0"] = train(df_arr, [0.3, 0.5, 0.7, 1], 1, [128], False)
-    # arr_metrics_dict["256_200_0"] = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [256, 200], False)
-    # arr_metrics_dict["256_128_0"] = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [256, 128], False)
-    # arr_metrics_dict["128_64_0"] = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [128, 64], False)
-    # arr_metrics_dict["256_128_64_0"] = train(df_arr, [0.3, 0.5, 0.7, 1], 3, [256, 128, 64], False)
-    #
-    # arr_metrics_df = pd.DataFrame.from_dict(arr_metrics_dict, orient='index',
-    #                                         columns=['0.3', '0.5', '0.7', '1'])
-    # arr_metrics_df.to_csv('../results/arrhythmia_16batch_relu_30test.csv')
+    arr_metrics_dict = {}
+    arr_metrics_dict["256_1"] = train(df_arr, [0.3, 0.5, 0.7, 1], 1, [256], True)
+    arr_metrics_dict["128_1"] = train(df_arr, [0.3, 0.5, 0.7, 1], 1, [128], True)
+    arr_metrics_dict["256_200_1"] = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [256, 200], True)
+    arr_metrics_dict["256_128_1"] = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [256, 128], True)
+    arr_metrics_dict["128_64_1"] = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [128, 64], True)
+    arr_metrics_dict["256_128_64_1"] = train(df_arr, [0.3, 0.5, 0.7, 1], 3, [256, 128, 64], True)
+
+    arr_metrics_dict["256_0"] = train(df_arr, [0.3, 0.5, 0.7, 1], 1, [256], False)
+    arr_metrics_dict["128_0"] = train(df_arr, [0.3, 0.5, 0.7, 1], 1, [128], False)
+    arr_metrics_dict["256_200_0"] = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [256, 200], False)
+    arr_metrics_dict["256_128_0"] = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [256, 128], False)
+    arr_metrics_dict["128_64_0"] = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [128, 64], False)
+    arr_metrics_dict["256_128_64_0"] = train(df_arr, [0.3, 0.5, 0.7, 1], 3, [256, 128, 64], False)
+
+    arr_metrics_df = pd.DataFrame.from_dict(arr_metrics_dict, orient='index',
+                                            columns=['0.3', '0.5', '0.7', '1'])
+    arr_metrics_df.to_csv('../results/arrhythmia_16batch_relu_30test.csv')
 
     # Train phishing
     phish_metrics_dict = {}
