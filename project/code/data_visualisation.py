@@ -41,3 +41,10 @@ arr_countplot = sns.countplot(df_arr["Class"])
 fig = arr_countplot.get_figure()
 fig.savefig("../figures/arr_countplot.png")
 plt.show()
+
+df_arr_dummy = pd.get_dummies(df_arr["Class"])
+df_arr_dummy["Class"] = df_arr_dummy[1]
+arr_countplot2 = sns.countplot(df_arr_dummy["Class"])
+fig = arr_countplot2.get_figure()
+fig.savefig("../figures/arr_countplot_binary.png")
+plt.show()

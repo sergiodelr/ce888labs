@@ -2,17 +2,17 @@ from keras.layers import Input, Dense
 from keras.models import Model
 
 
-def pretrained_encoder(x_train, x_test, hidden_layers, layer_sizes, reconstruct_input = False):
+def pretrained_encoder(x_train, x_test, hidden_layers, layer_sizes, reconstruct_input=False):
     """
     Creates a pre trained encoder with the specified training data. The encoder is trained in a greedy layer-wise
     manner.
     :param reconstruct_input: Whether to train the autoencoder greedily to reconstruct the input or to reconstruct
-                                the previous layer.
+                                the previous layer. Default is False.
     :param x_train: Training data (unsupervised) np array.
     :param x_test: Testing data (unsupervised) np array.
     :param hidden_layers: Number of hidden layers.
     :param layer_sizes: List of layer sizes.
-    :return: Pre trained Keras model.
+    :return: Pre trained Keras model and its loss.
     """
     print(f"\nPre training model: Hidden layers: {hidden_layers} Layer sizes: {layer_sizes} Training data: {len(x_train)}")
 
@@ -80,7 +80,14 @@ def pretrained_encoder(x_train, x_test, hidden_layers, layer_sizes, reconstruct_
                             batch_size=16,
                             shuffle=True)
 
-    return encoder
+    if reconstruct_input:
+        if x_test is not None:
+            metric = autoencoder.evaluate(x_test, x_test_latent)
+        else:
+            metric = autoencoder.evaluate(x_train, x_train_latent)
+    else:
+        metric = None
+    return encoder, metric
 
 
 def encoder_classifier_model(pretrained_encoder_model):
