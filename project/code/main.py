@@ -1,3 +1,11 @@
+"""
+Sergio Adrian de Leon Rivera
+sd18621@essex.ac.uk
+Data Science and Decision Making
+
+Trains Autoencoder on different proportions of 3 datasets to learn latent features to use with a classifier.
+"""
+
 import pandas as pd
 from scipy.io import arff
 
@@ -28,61 +36,61 @@ if __name__ == '__main__':
 
     # Train arrhythmia
     # Relu
-    # arr_metrics_dict = {}
-    # arr_metrics_noise_dict = {}
-    # arr_loss = {}
-    # arr_metrics_dict["256_1"], arr_loss["256_1"] = train(df_arr, [0.3, 0.5, 0.7, 1], 1, [256], True, True)
-    # arr_metrics_dict["128_1"], arr_loss["128_1"] = train(df_arr, [0.3, 0.5, 0.7, 1], 1, [128], True, True)
-    # arr_metrics_dict["256_200_1"], arr_loss["256_200_1"] = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [256, 200], True, True)
-    # arr_metrics_dict["256_128_1"], arr_loss["256_128_1"] = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [256, 128], True, True)
-    # arr_metrics_dict["128_64_1"], arr_loss["128_64_1"] = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [128, 64], True, True)
-    # arr_metrics_dict["256_128_64_1"], arr_loss["256_128_64_1"] = train(df_arr, [0.3, 0.5, 0.7, 1], 3, [256, 128, 64], True, True)
-    #
-    # arr_metrics_noise_dict["256_1"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 1, [256], True, True, True)
-    # arr_metrics_noise_dict["128_1"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 1, [128], True, True, True)
-    # arr_metrics_noise_dict["256_200_1"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [256, 200], True, True, True)
-    # arr_metrics_noise_dict["256_128_1"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [256, 128], True, True, True)
-    # arr_metrics_noise_dict["128_64_1"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [128, 64], True, True, True)
-    # arr_metrics_noise_dict["256_128_64_1"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 3, [256, 128, 64], True, True, True)
-    #
-    # arr_metrics_dict["256_0"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 1, [256], False, True)
-    # arr_metrics_dict["128_0"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 1, [128], False, True)
-    # arr_metrics_dict["256_200_0"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [256, 200], False, True)
-    # arr_metrics_dict["256_128_0"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [256, 128], False, True)
-    # arr_metrics_dict["128_64_0"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [128, 64], False, True)
-    # arr_metrics_dict["256_128_64_0"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 3, [256, 128, 64], False, True)
-    #
-    # arr_metrics_df = pd.DataFrame.from_dict(arr_metrics_dict, orient='index',
-    #                                         columns=['0.3', '0.5', '0.7', '1'])
-    # arr_metrics_df.to_csv('../results/arrhythmia_16batch_relu_30test.csv')
-    #
-    # arr_metrics_noise_df = pd.DataFrame.from_dict(arr_metrics_noise_dict, orient='index',
-    #                                         columns=['0.3', '0.5', '0.7', '1'])
-    # arr_metrics_noise_df.to_csv('../results/arrhythmia_16batch_noise_30test.csv')
-    #
-    # arr_loss_df = pd.DataFrame.from_dict(arr_loss, orient='index',
-    #                                         columns=['0.3', '0.5', '0.7', '1'])
-    # arr_loss_df.to_csv('../results/arrhythmia_16batch_loss.csv')
-    #
-    # # Sigmoid
-    # arr_metrics_dict = {}
-    # arr_metrics_dict["256_1"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 1, [256], True, False)
-    # arr_metrics_dict["128_1"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 1, [128], True, False)
-    # arr_metrics_dict["256_200_1"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [256, 200], True, False)
-    # arr_metrics_dict["256_128_1"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [256, 128], True, False)
-    # arr_metrics_dict["128_64_1"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [128, 64], True, False)
-    # arr_metrics_dict["256_128_64_1"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 3, [256, 128, 64], True, False)
-    #
-    # arr_metrics_dict["256_0"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 1, [256], False, False)
-    # arr_metrics_dict["128_0"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 1, [128], False, False)
-    # arr_metrics_dict["256_200_0"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [256, 200], False, False)
-    # arr_metrics_dict["256_128_0"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [256, 128], False, False)
-    # arr_metrics_dict["128_64_0"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [128, 64], False, False)
-    # arr_metrics_dict["256_128_64_0"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 3, [256, 128, 64], False, False)
-    #
-    # arr_metrics_df = pd.DataFrame.from_dict(arr_metrics_dict, orient='index',
-    #                                         columns=['0.3', '0.5', '0.7', '1'])
-    # arr_metrics_df.to_csv('../results/arrhythmia_16batch_sigmoid_30test.csv')
+    arr_metrics_dict = {}
+    arr_metrics_noise_dict = {}
+    arr_loss = {}
+    arr_metrics_dict["256_1"], arr_loss["256_1"] = train(df_arr, [0.3, 0.5, 0.7, 1], 1, [256], True, True)
+    arr_metrics_dict["128_1"], arr_loss["128_1"] = train(df_arr, [0.3, 0.5, 0.7, 1], 1, [128], True, True)
+    arr_metrics_dict["256_200_1"], arr_loss["256_200_1"] = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [256, 200], True, True)
+    arr_metrics_dict["256_128_1"], arr_loss["256_128_1"] = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [256, 128], True, True)
+    arr_metrics_dict["128_64_1"], arr_loss["128_64_1"] = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [128, 64], True, True)
+    arr_metrics_dict["256_128_64_1"], arr_loss["256_128_64_1"] = train(df_arr, [0.3, 0.5, 0.7, 1], 3, [256, 128, 64], True, True)
+
+    arr_metrics_noise_dict["256_1"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 1, [256], True, True, True)
+    arr_metrics_noise_dict["128_1"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 1, [128], True, True, True)
+    arr_metrics_noise_dict["256_200_1"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [256, 200], True, True, True)
+    arr_metrics_noise_dict["256_128_1"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [256, 128], True, True, True)
+    arr_metrics_noise_dict["128_64_1"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [128, 64], True, True, True)
+    arr_metrics_noise_dict["256_128_64_1"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 3, [256, 128, 64], True, True, True)
+
+    arr_metrics_dict["256_0"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 1, [256], False, True)
+    arr_metrics_dict["128_0"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 1, [128], False, True)
+    arr_metrics_dict["256_200_0"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [256, 200], False, True)
+    arr_metrics_dict["256_128_0"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [256, 128], False, True)
+    arr_metrics_dict["128_64_0"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [128, 64], False, True)
+    arr_metrics_dict["256_128_64_0"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 3, [256, 128, 64], False, True)
+
+    arr_metrics_df = pd.DataFrame.from_dict(arr_metrics_dict, orient='index',
+                                            columns=['0.3', '0.5', '0.7', '1'])
+    arr_metrics_df.to_csv('../results/arrhythmia_16batch_relu_30test.csv')
+
+    arr_metrics_noise_df = pd.DataFrame.from_dict(arr_metrics_noise_dict, orient='index',
+                                            columns=['0.3', '0.5', '0.7', '1'])
+    arr_metrics_noise_df.to_csv('../results/arrhythmia_16batch_noise_30test.csv')
+
+    arr_loss_df = pd.DataFrame.from_dict(arr_loss, orient='index',
+                                            columns=['0.3', '0.5', '0.7', '1'])
+    arr_loss_df.to_csv('../results/arrhythmia_16batch_loss.csv')
+
+    # Sigmoid
+    arr_metrics_dict = {}
+    arr_metrics_dict["256_1"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 1, [256], True, False)
+    arr_metrics_dict["128_1"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 1, [128], True, False)
+    arr_metrics_dict["256_200_1"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [256, 200], True, False)
+    arr_metrics_dict["256_128_1"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [256, 128], True, False)
+    arr_metrics_dict["128_64_1"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [128, 64], True, False)
+    arr_metrics_dict["256_128_64_1"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 3, [256, 128, 64], True, False)
+
+    arr_metrics_dict["256_0"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 1, [256], False, False)
+    arr_metrics_dict["128_0"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 1, [128], False, False)
+    arr_metrics_dict["256_200_0"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [256, 200], False, False)
+    arr_metrics_dict["256_128_0"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [256, 128], False, False)
+    arr_metrics_dict["128_64_0"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 2, [128, 64], False, False)
+    arr_metrics_dict["256_128_64_0"], _ = train(df_arr, [0.3, 0.5, 0.7, 1], 3, [256, 128, 64], False, False)
+
+    arr_metrics_df = pd.DataFrame.from_dict(arr_metrics_dict, orient='index',
+                                            columns=['0.3', '0.5', '0.7', '1'])
+    arr_metrics_df.to_csv('../results/arrhythmia_16batch_sigmoid_30test.csv')
 
     # Train phishing
     # Relu

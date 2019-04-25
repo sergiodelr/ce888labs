@@ -30,8 +30,11 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/code/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
-              <caret line="141" column="107" lean-forward="true" selection-start-line="141" selection-start-column="107" selection-end-line="141" selection-end-column="107" />
+            <state relative-caret-position="85">
+              <caret line="5" column="108" selection-start-line="5" selection-start-column="108" selection-end-line="5" selection-end-column="108" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -230,7 +233,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32893288" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.37799564" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.23856209" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.28540304" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17963752" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
@@ -626,8 +629,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/code/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="141" column="107" lean-forward="true" selection-start-line="141" selection-start-column="107" selection-end-line="141" selection-end-column="107" />
+        <state relative-caret-position="85">
+          <caret line="5" column="108" selection-start-line="5" selection-start-column="108" selection-end-line="5" selection-end-column="108" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
