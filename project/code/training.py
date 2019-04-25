@@ -1,4 +1,5 @@
 from keras.callbacks import EarlyStopping
+import numpy as np
 import pandas as pd
 from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import train_test_split
@@ -11,7 +12,6 @@ def train(df, training_proportions, hidden_layers, layer_sizes, same_proportion_
     """
     Trains autoencoders with different amounts of training examples and returns each of their accuracies
     and ROC scores.
-    :param add_noise: Whether to add noise to the training data. Default is False.
     :param df: Dataframe with data to be fitted. Must contain a column named 'Class' that corresponds to the
                 class of the examples.
     :param training_proportions: List of the proportions of the dataset that will be used for training in decimal form.
@@ -24,6 +24,7 @@ def train(df, training_proportions, hidden_layers, layer_sizes, same_proportion_
                                             out with 80% of the data, leaving 20% for testing. Default is True.
     :param autoencoder_reconstruct_input: Whether to train the autoencoder greedily to reconstruct the input or to
                                             reconstruct the previous layer. The default is False.
+    :param add_noise: Whether to add noise to the training data to train a denoising autoencoder. Default is False.
     :return: List of tuples of the form (Accuracy, ROC score) for each of the amounts of training examples.
     """
     results = []
@@ -33,11 +34,24 @@ def train(df, training_proportions, hidden_layers, layer_sizes, same_proportion_
     for proportion in training_proportions:
         if proportion != 1:
             x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=1 - proportion, random_state=1)
-            encoder, loss = pretrained_encoder(x_train, x_test, hidden_layers, layer_sizes,
-                                               reconstruct_input=autoencoder_reconstruct_input)
+            if add_noise:
+                x_noise_train = x_train + np.random.normal(0, 0.1, x_train.shape)
+                x_noise_test = x_test + np.random.normal(0, 0.1, x_test.shape)
+                encoder, loss = pretrained_encoder(x_train, x_test, hidden_layers, layer_sizes,
+                                                   reconstruct_input=autoencoder_reconstruct_input,
+                                                   x_noise_train=x_noise_train, x_noise_test=x_noise_test)
+            else:
+                encoder, loss = pretrained_encoder(x_train, x_test, hidden_layers, layer_sizes,
+                                                   reconstruct_input=autoencoder_reconstruct_input)
         else:
-            encoder, loss = pretrained_encoder(x, None, hidden_layers, layer_sizes,
-                                               reconstruct_input=autoencoder_reconstruct_input)
+            if add_noise:
+                x_noise_train = x + np.random.normal(0, 0.1, x.shape)
+                encoder, loss = pretrained_encoder(x, None, hidden_layers, layer_sizes,
+                                                   reconstruct_input=autoencoder_reconstruct_input,
+                                                   x_noise_train=x_noise_train)
+            else:
+                encoder, loss = pretrained_encoder(x, None, hidden_layers, layer_sizes,
+                                                   reconstruct_input=autoencoder_reconstruct_input)
         model = encoder_classifier_model(encoder)
         model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 

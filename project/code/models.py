@@ -2,7 +2,8 @@ from keras.layers import Input, Dense
 from keras.models import Model
 
 
-def pretrained_encoder(x_train, x_test, hidden_layers, layer_sizes, reconstruct_input=False):
+def pretrained_encoder(x_train, x_test, hidden_layers, layer_sizes, reconstruct_input=False, x_noise_train=None,
+                       x_noise_test=None):
     """
     Creates a pre trained encoder with the specified training data. The encoder is trained in a greedy layer-wise
     manner.
@@ -21,7 +22,7 @@ def pretrained_encoder(x_train, x_test, hidden_layers, layer_sizes, reconstruct_
     else:
         activation = "sigmoid"
 
-    # Train first encoder layer
+    # Define and train first encoder layer
     input_layer = Input(shape=(x_train.shape[1],))
     encoder_layer = Dense(layer_sizes[0], activation=activation)(input_layer)
     decoder_layer = Dense(x_train.shape[1], activation="sigmoid")(encoder_layer)
@@ -30,17 +31,29 @@ def pretrained_encoder(x_train, x_test, hidden_layers, layer_sizes, reconstruct_
 
     autoencoder.compile(optimizer='adadelta', loss='binary_crossentropy')
 
+    # Add noise if necessary
+    if x_noise_train is not None:
+        x_input = x_noise_train
+    else:
+        x_input = x_train
+
+    if x_noise_test is not None:
+        x_test_input = x_noise_test
+    else:
+        x_test_input = x_test
+
     if x_test is not None:
-        autoencoder.fit(x_train, x_train,
+        autoencoder.fit(x_input, x_train,
                         epochs=30,
                         batch_size=16,
                         shuffle=True,
-                        validation_data=(x_test, x_test))
+                        validation_data=(x_test_input, x_test))
     else:
-        autoencoder.fit(x_train, x_train,
+        autoencoder.fit(x_input, x_train,
                         epochs=30,
                         batch_size=16,
                         shuffle=True)
+
     # Train rest of layers greedily
     for i in range(1, hidden_layers):
         # Generate training examples for layer i from latent features
@@ -69,22 +82,22 @@ def pretrained_encoder(x_train, x_test, hidden_layers, layer_sizes, reconstruct_
 
         autoencoder.compile(optimizer='adam', loss='binary_crossentropy')
         if x_test is not None:
-            autoencoder.fit(x_train, x_train_latent,
+            autoencoder.fit(x_input, x_train_latent,
                             epochs=30,
                             batch_size=16,
                             shuffle=True,
-                            validation_data=(x_test, x_test_latent))
+                            validation_data=(x_test_input, x_test_latent))
         else:
-            autoencoder.fit(x_train, x_train_latent,
+            autoencoder.fit(x_input, x_train_latent,
                             epochs=30,
                             batch_size=16,
                             shuffle=True)
 
     if reconstruct_input:
         if x_test is not None:
-            metric = autoencoder.evaluate(x_test, x_test_latent)
+            metric = autoencoder.evaluate(x_test, x_test)
         else:
-            metric = autoencoder.evaluate(x_train, x_train_latent)
+            metric = autoencoder.evaluate(x_train, x_train)
     else:
         metric = None
     return encoder, metric
@@ -94,7 +107,6 @@ def encoder_classifier_model(pretrained_encoder_model):
     """
     Creates a binary classifier model from the pre trained encoder.
     :param pretrained_encoder_model: The pre trained encoder.
-    :param number_of_classes: The number of classes.
     :return: A Keras model consisting of the pre trained encoder followed by a sigmoid classifier.
     """
     # input_layer = pretrained_encoder_model.layers[0]
